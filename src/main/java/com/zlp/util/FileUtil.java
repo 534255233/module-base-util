@@ -2,38 +2,45 @@ package com.zlp.util;
 
 import java.io.File;
 
+/**
+ * 描述：
+ * @author zhoulongpeng
+ * @date   2016-02-03
+ *
+ */
 public class FileUtil {
 
-	// private static Logger log = LoggerFactory.getLogger(TimeUtil.class);
+//	 private static Logger log = LoggerFactory.getLogger(FileUtil.class);
 
 	/**
 	 * 描述：删除指定后缀名的文件
 	 * 
 	 * @param file  一个目录或者文件
-	 * @param lastFileName  要删除的文件后缀名
+	 * @param extendFileName  要删除的文件后缀名
 	 */
-	public static boolean deleteByFileLastName(File file, String lastFileName) {
+	public static boolean deleteByFileExtendName(File file, String extendFileName) {
 		boolean result = true;
 		if (file.isFile()) {
-			if (file.getName().endsWith(lastFileName)) {
-				System.out.println("删除：" + file.getName());
+			if (file.getName().endsWith(extendFileName)) {
+//				System.out.println("删除：" + file.getName());
 				result = file.delete();
 			}
 		} else {
-			System.out.println("目录：" + file.getName());
+//			System.out.println("目录：" + file.getName());／
 			if(false || file.getName().equals("test")) {
 				result = deleteDirectory(file);
 			} else {
 				File[] files = file.listFiles();
 				for (File s : files) {
-					result = deleteByFileLastName(s, lastFileName);
+					result = deleteByFileExtendName(s, extendFileName);
 				}
 			}
 		}
 		return result;
 	}
+	
 	/**
-	 * 描述：删除指定后缀名的文件
+	 * 描述：删除的文件
 	 * 
 	 * @param file  一个目录或者文件
 	 * @param lastFileName  要删除的文件后缀名
@@ -43,11 +50,11 @@ public class FileUtil {
 		final String lastFileName = "uncompressed.js";
 		if (file.isFile()) {
 			if (file.getName().endsWith(lastFileName)) {
-				System.out.println("删除：" + file.getName());
+//				System.out.println("删除：" + file.getName());
 				result = file.delete();
 			}
 		} else {
-			System.out.println("目录：" + file.getName());
+//			System.out.println("目录：" + file.getName());
 			if(file.getName().equals("test") || file.getName().equals("tests") || file.getName().equals("demo") || file.getName().equals("demos") || file.getName().equals("doc") || file.getName().equals("docs")) {
 				result = deleteDirectory(file);
 			} else {
@@ -60,6 +67,12 @@ public class FileUtil {
 		return result;
 	}
 	
+	/**
+	 * 描述：删除的目录
+	 * 
+	 * @param file  一个目录或者文件
+	 * @param lastFileName  要删除的文件后缀名
+	 */
 	public static boolean deleteDirectory(File file) {
 	    //如果dir对应的文件不存在，或者不是一个目录，则退出  
 	    if (!file.exists() || !file.isDirectory()) return false;
